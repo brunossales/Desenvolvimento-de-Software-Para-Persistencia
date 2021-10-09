@@ -1,4 +1,5 @@
 
+
  ## 1. Escreva uma aplicação para ler um arquivo binário origem e gravá-lo em outro arquivo (arquivo destino).
 
 ### s nomes dos arquivos (origem e destino) devem ser definidos na chamada da aplicação via argumento de linha de comando.

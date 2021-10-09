@@ -17,6 +17,7 @@ public class App {
             int solver = arquivoExistence.read(data); // usand o bloco de byte
             while (solver != -1) {
                 os.write(data);
+                System.out.println("Bloco size: " + solver);
                 solver = arquivoExistence.read(data);
             }
             long elapsed = System.currentTimeMillis() - start;
