@@ -5,24 +5,24 @@ public class App {
     public static void main(String[] args) throws IOException {
         try {
             Scanner scanner = new Scanner(System.in);
-            InputStream arquivoExistence = new FileInputStream(args[0]);
-            OutputStream os = new FileOutputStream(args[1]);
 
             System.out.println("Quantidade por block de byte transferivel: ");
             int sizeBlock = scanner.nextInt();
 
-            byte[] data = new byte[sizeBlock]; // bloco de byte criado
+            InputStream arquivoExistence = new BufferedInputStream(new FileInputStream(args[0]), sizeBlock);
+            OutputStream newFile = new BufferedOutputStream(new FileOutputStream(args[1]), sizeBlock);
+            // já estou definindo o tamanho especificado do meu buffered
 
+            byte[] data = new byte[sizeBlock]; // Agora pegando o bloco de byte
             long start = System.currentTimeMillis();
-            int solver = arquivoExistence.read(data); // usand o bloco de byte
-            while (solver != -1) {
-                os.write(data);
-                System.out.println("Bloco size: " + solver);
+            int solver = arquivoExistence.read(data);
+            while (solver != -1) {// usand o bloco de byte
+                newFile.write(data);
                 solver = arquivoExistence.read(data);
             }
             long elapsed = System.currentTimeMillis() - start;
             System.out.println("Successful ✅\nTime: " + elapsed + " ms");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e.toString());
         }
 
