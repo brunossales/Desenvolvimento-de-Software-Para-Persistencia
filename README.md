@@ -1,2 +1,5 @@
-# Desenvolvimento-de-Software-Para-Persistencia
-Repositório destinado a cadeira de desenvolvimento de software para persistência, onde vou colocar as minhas práticas e atividades no decorrer da cadeira.  
+# Repositório da disciplina Desenvolvimento de Software para Persistência ✅
+
+## Desafios e estudos feitos em aula e fora de aula. ✅
+
+## Tudo feito em variadas Linguagens e métodos. 👨‍💻
