@@ -1,37 +1,38 @@
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 public class PrintarAll {
-  String properties;
-  String inicial;
-  String finall;
-  int aux = 0;
+  String arquivo;
+  int aux = 1;
 
-  PrintarAll(String arquivo, String ini, String fini) {
-    this.properties = arquivo;
-    this.inicial = ini;
-    this.finall = fini;
+  PrintarAll(String arquivo) {
+    this.arquivo = arquivo;
   }
 
   public void print() {
-    try (InputStream input = getClass().getClassLoader().getResourceAsStream("resources/" + this.properties)) {
+    try {
       Properties prop = new Properties();
-      if (input == null) {
-        System.out.println("Error " + this.properties);
-        return;
-      }
-      prop.load(input);
-      prop.forEach((Key, Value) -> {
-        if (this.inicial.equals(Key.toString())) {
-          System.out.println("Key: " + Key + ", Value: " + Value);
-          aux++;
-        } else if (aux > 0) {
-          System.out.println("Key: " + Key + ", Value: " + Value);
-          if (this.finall.equals(Key.toString()))
-            aux = 0;
+
+      prop.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+      Scanner scannerText = new Scanner(new FileInputStream(".\\resources\\" + this.arquivo));
+
+      int inicial = Integer.parseInt(prop.getProperty("linha_inicial"));
+      int finall = Integer.parseInt(prop.getProperty("linha_final"));
+
+      String line = scannerText.nextLine();
+
+      while (scannerText.hasNextLine()) {
+        if (aux >= inicial && aux < finall) {
+          System.out.println(line);
+        } else if (this.aux == finall) {
+          System.out.println(line);
+          break;
         }
-      });
+        line = scannerText.nextLine();
+        this.aux++;
+      }
+      scannerText.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
