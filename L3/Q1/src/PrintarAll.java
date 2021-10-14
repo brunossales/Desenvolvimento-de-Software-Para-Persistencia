@@ -14,7 +14,7 @@ public class PrintarAll {
     try {
       Properties prop = new Properties();
 
-      prop.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+      prop.load(new FileInputStream(".\\resources\\config.properties"));
       Scanner scannerText = new Scanner(new FileInputStream(".\\resources\\" + this.arquivo));
 
       int inicial = Integer.parseInt(prop.getProperty("linha_inicial"));
