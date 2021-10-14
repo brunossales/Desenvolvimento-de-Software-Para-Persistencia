@@ -1,14 +1,17 @@
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.Key;
 import java.util.*;
 
 public class PrintarAll {
   String properties;
+  String inicial;
+  String finall;
+  int aux = 0;
 
-  PrintarAll(String arquivo) {
+  PrintarAll(String arquivo, String ini, String fini) {
     this.properties = arquivo;
-
+    this.inicial = ini;
+    this.finall = fini;
   }
 
   public void print() {
@@ -20,7 +23,14 @@ public class PrintarAll {
       }
       prop.load(input);
       prop.forEach((Key, Value) -> {
-        System.out.println("Key: " + Key + ", Value: " + Value);
+        if (this.inicial.equals(Key.toString())) {
+          System.out.println("Key: " + Key + ", Value: " + Value);
+          aux++;
+        } else if (aux > 0) {
+          System.out.println("Key: " + Key + ", Value: " + Value);
+          if (this.finall.equals(Key.toString()))
+            aux = 0;
+        }
       });
     } catch (IOException e) {
       e.printStackTrace();
