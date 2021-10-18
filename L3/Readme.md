@@ -4,4 +4,6 @@
 
 ## Por conta do padrão de diretório criado pelo maven, ocorre essas várias pastas
 
+## Os arquivos binários e de texto ficam na pasta "resources"
+
 ## Lista e projetos feito em java
