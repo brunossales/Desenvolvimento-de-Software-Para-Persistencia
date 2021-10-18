@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "serializando/src/main/java/valores",
+        "src/main/java/com/example"
+    ],
+    "java.project.outputPath": "bin"
+}
