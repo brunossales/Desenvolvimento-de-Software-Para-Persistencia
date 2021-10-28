@@ -27,9 +27,12 @@ public class SerializaXmlJson {
                 String[] part = linha.split(",");
                 this.carros.add(new Carro(Integer.parseInt(part[0]), part[1], part[2], Integer.parseInt(part[3])));
             }
+            long start = System.currentTimeMillis();
             this.om.writeValue(new File(filenameJson), this.carros);
             xm.writeValue(new File(filenameXml), this.carros);
-            JOptionPane.showMessageDialog(null, "Todos os objetos armazenados no arquivo CSV foram serializados", "Inserção Concluida",  JOptionPane.INFORMATION_MESSAGE);
+            long elapsed = System.currentTimeMillis() - start;
+            JOptionPane.showMessageDialog(null, "Todos os objetos armazenados no arquivo CSV foram serializados\n"
+                                                            + "Tempo para a serialização: " + elapsed + " ms", "Inserção Concluida",  JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException e ){
             e.printStackTrace();
         } catch (IOException e) {
