@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.*;
 
 public class SerializaXmlJson {
+    String linha = "";
     List<Carro> carros;
     ObjectMapper om;
     String filename = "C:\\Users\\Bruno Sales\\Desktop\\Faculdade Bruno\\4° Semestre\\Desenvolvimento de Software para Persistência\\Desenvolvimento-de-Software-Para-Persistencia\\Trabalho 1\\src\\main\\resources\\objetos.csv";
@@ -18,19 +19,18 @@ public class SerializaXmlJson {
         this.carros = new ArrayList<Carro>();
         this.om = new ObjectMapper();
         this.xm = new XmlMapper();
-        this.leitor = new BufferedReader(new FileReader(filename));
     }
     public void transforma(){
         try{
-            String linha = "";
+            this.leitor = new BufferedReader(new FileReader(filename));
             this.carros.clear();
             while((linha = leitor.readLine()) != null) {
                 String[] part = linha.split(",");
                 this.carros.add(new Carro(Integer.parseInt(part[0]), part[1], part[2], Integer.parseInt(part[3])));
             }
             long start = System.currentTimeMillis();
-            this.om.writeValue(new File(filenameJson), this.carros);
-            xm.writeValue(new File(filenameXml), this.carros);
+            this.om.writerWithDefaultPrettyPrinter().writeValue(new File(filenameJson), this.carros);
+            this.xm.writerWithDefaultPrettyPrinter().writeValue(new File(filenameXml), this.carros);
             long elapsed = System.currentTimeMillis() - start;
             JOptionPane.showMessageDialog(null, "Todos os objetos armazenados no arquivo CSV foram serializados\n"
                                                             + "Tempo para a serialização: " + elapsed + " ms", "Inserção Concluida",  JOptionPane.INFORMATION_MESSAGE);
@@ -41,7 +41,8 @@ public class SerializaXmlJson {
         }
     }
     public void show() throws IOException {
-        String linha = "";
+        linha = "";
+        this.leitor = new BufferedReader(new FileReader(filename));
         this.carros.clear();
         while((linha = leitor.readLine()) != null) {
             String[] part = linha.split(",");
