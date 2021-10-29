@@ -14,15 +14,16 @@ public class SerializaXmlJson {
 
     XmlMapper xm;
     BufferedReader leitor;
-    SerializaXmlJson() {
+    SerializaXmlJson() throws FileNotFoundException {
         this.carros = new ArrayList<Carro>();
         this.om = new ObjectMapper();
         this.xm = new XmlMapper();
+        this.leitor = new BufferedReader(new FileReader(filename));
     }
     public void transforma(){
         try{
-            this.leitor = new BufferedReader(new FileReader(filename));
-            String linha;
+            String linha = "";
+            this.carros.clear();
             while((linha = leitor.readLine()) != null) {
                 String[] part = linha.split(",");
                 this.carros.add(new Carro(Integer.parseInt(part[0]), part[1], part[2], Integer.parseInt(part[3])));
@@ -39,5 +40,19 @@ public class SerializaXmlJson {
             e.printStackTrace();
         }
     }
+    public void show() throws IOException {
+        String linha = "";
+        this.carros.clear();
+        while((linha = leitor.readLine()) != null) {
+            String[] part = linha.split(",");
+            this.carros.add(new Carro(Integer.parseInt(part[0]), part[1], part[2], Integer.parseInt(part[3])));
+        }
+        StringBuffer bf = new StringBuffer();
+        for (Carro c: this.carros) {
+            bf.append(c).append("\n");
+        }
+        JOptionPane.showMessageDialog(null, bf.toString(), "Carros",  JOptionPane.INFORMATION_MESSAGE);
+    }
+
 
 }

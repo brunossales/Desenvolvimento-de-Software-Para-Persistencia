@@ -1,7 +1,8 @@
 import javax.swing.*;
+import java.io.FileNotFoundException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         SerializaCsv s = new SerializaCsv();
         SerializaXmlJson ser = new SerializaXmlJson();
         long start = System.currentTimeMillis();
@@ -10,6 +11,7 @@ public class Main {
                 String line = JOptionPane.showInputDialog(null, "Digite os seguintes Comandos:\n"
                         + "add - Para ser direcionado a tela de adicionar carros\n"
                         + "ser - Para serializar em arquivos XML e JSON, todos os objetos escritos no arquivo CSV\n"
+                        + "show - Para mostrar todos os carros armazenados\n"
                         + "exit - Se deseja encerrar a sessão", "Página Inicial", JOptionPane.INFORMATION_MESSAGE);
                 if (line.equalsIgnoreCase("exit")) {
                     long elapsed = System.currentTimeMillis() - start;
@@ -38,6 +40,8 @@ public class Main {
                 }
                 else if(line.equalsIgnoreCase("ser"))
                     ser.transforma();
+                else if(line.equalsIgnoreCase("show"))
+                    ser.show();
                 else
                     JOptionPane.showMessageDialog(null, "Opção Inexistente", "Digite algo novamente", JOptionPane.ERROR_MESSAGE);
             } catch (Exception e){
