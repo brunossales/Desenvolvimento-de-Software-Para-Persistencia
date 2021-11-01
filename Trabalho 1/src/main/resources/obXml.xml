@@ -47,4 +47,22 @@
     <marca>Hyundai</marca>
     <ano>2021</ano>
   </item>
+  <item>
+    <chassi>33</chassi>
+    <modelo>Civic</modelo>
+    <marca>Fiat</marca>
+    <ano>2020</ano>
+  </item>
+  <item>
+    <chassi>33</chassi>
+    <modelo>Fox</modelo>
+    <marca>Volkswagem</marca>
+    <ano>2015</ano>
+  </item>
+  <item>
+    <chassi>34</chassi>
+    <modelo>Pagero</modelo>
+    <marca>Wolkswagem</marca>
+    <ano>2018</ano>
+  </item>
 </ArrayList>

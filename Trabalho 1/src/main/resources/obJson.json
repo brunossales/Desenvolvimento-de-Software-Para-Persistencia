@@ -38,4 +38,19 @@
   "modelo" : "Range",
   "marca" : "Hyundai",
   "ano" : 2021
+}, {
+  "chassi" : 33,
+  "modelo" : "Civic",
+  "marca" : "Fiat",
+  "ano" : 2020
+}, {
+  "chassi" : 33,
+  "modelo" : "Fox",
+  "marca" : "Volkswagem",
+  "ano" : 2015
+}, {
+  "chassi" : 34,
+  "modelo" : "Pagero",
+  "marca" : "Wolkswagem",
+  "ano" : 2018
 } ]

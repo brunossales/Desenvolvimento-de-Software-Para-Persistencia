@@ -24,6 +24,7 @@ public class SerializaXmlJson {
         try{
             this.leitor = new BufferedReader(new FileReader(filename));
             this.carros.clear();
+            linha = leitor.readLine();
             while((linha = leitor.readLine()) != null) {
                 String[] part = linha.split(",");
                 this.carros.add(new Carro(Integer.parseInt(part[0]), part[1], part[2], Integer.parseInt(part[3])));
@@ -44,6 +45,7 @@ public class SerializaXmlJson {
         linha = "";
         this.leitor = new BufferedReader(new FileReader(filename));
         this.carros.clear();
+        linha = leitor.readLine();
         while((linha = leitor.readLine()) != null) {
             String[] part = linha.split(",");
             this.carros.add(new Carro(Integer.parseInt(part[0]), part[1], part[2], Integer.parseInt(part[3])));
