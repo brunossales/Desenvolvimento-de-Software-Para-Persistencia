@@ -59,4 +59,22 @@
     <marca>Volkswagem</marca>
     <ano>2015</ano>
   </item>
+  <item>
+    <chassi>34</chassi>
+    <modelo>Pagero</modelo>
+    <marca>Wolkswagem</marca>
+    <ano>2018</ano>
+  </item>
+  <item>
+    <chassi>36</chassi>
+    <modelo>HB20</modelo>
+    <marca>Hyundai</marca>
+    <ano>2018</ano>
+  </item>
+  <item>
+    <chassi>38</chassi>
+    <modelo>SW4</modelo>
+    <marca>Toyota</marca>
+    <ano>2020</ano>
+  </item>
 </ArrayList>

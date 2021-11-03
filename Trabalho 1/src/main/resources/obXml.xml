@@ -65,4 +65,22 @@
     <marca>Wolkswagem</marca>
     <ano>2018</ano>
   </item>
+  <item>
+    <chassi>36</chassi>
+    <modelo>HB20</modelo>
+    <marca>Hyundai</marca>
+    <ano>2018</ano>
+  </item>
+  <item>
+    <chassi>38</chassi>
+    <modelo>SW4</modelo>
+    <marca>Toyota</marca>
+    <ano>2020</ano>
+  </item>
+  <item>
+    <chassi>39</chassi>
+    <modelo>Spin</modelo>
+    <marca>Fiat</marca>
+    <ano>2020</ano>
+  </item>
 </ArrayList>

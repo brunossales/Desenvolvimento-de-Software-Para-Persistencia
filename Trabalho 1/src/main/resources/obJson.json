@@ -53,4 +53,19 @@
   "modelo" : "Pagero",
   "marca" : "Wolkswagem",
   "ano" : 2018
+}, {
+  "chassi" : 36,
+  "modelo" : "HB20",
+  "marca" : "Hyundai",
+  "ano" : 2018
+}, {
+  "chassi" : 38,
+  "modelo" : "SW4",
+  "marca" : "Toyota",
+  "ano" : 2020
+}, {
+  "chassi" : 39,
+  "modelo" : "Spin",
+  "marca" : "Fiat",
+  "ano" : 2020
 } ]

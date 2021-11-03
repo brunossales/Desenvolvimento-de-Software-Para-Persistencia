@@ -48,4 +48,19 @@
   "modelo" : "Fox",
   "marca" : "Volkswagem",
   "ano" : 2015
+}, {
+  "chassi" : 34,
+  "modelo" : "Pagero",
+  "marca" : "Wolkswagem",
+  "ano" : 2018
+}, {
+  "chassi" : 36,
+  "modelo" : "HB20",
+  "marca" : "Hyundai",
+  "ano" : 2018
+}, {
+  "chassi" : 38,
+  "modelo" : "SW4",
+  "marca" : "Toyota",
+  "ano" : 2020
 } ]
