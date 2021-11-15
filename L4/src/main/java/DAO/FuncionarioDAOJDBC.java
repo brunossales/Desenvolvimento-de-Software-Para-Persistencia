@@ -119,7 +119,7 @@ public class FuncionarioDAOJDBC implements  FuncionarioDao{
 
     private Funcionario map (ResultSet rs) throws SQLException {
         Funcionario aux = new Funcionario();
-        aux.setId(rs.getInt("id"));
+        aux.setId(rs.getInt("idFun"));
         aux.setCpf(rs.getString("cpf"));
         aux.setMatricula(rs.getInt("matricula"));
         aux.setEmail(rs.getString("email"));
