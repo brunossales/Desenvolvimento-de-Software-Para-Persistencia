@@ -1,0 +1,20 @@
+# Autodetect text files
+* text=auto
+
+# Definitively text files 
+*.xml text
+*.java text
+*.properties text
+*.xhtml
+*.jsp
+*.jsf
+*.txt text
+*.c text
+*.h text
+*.js
+*.css
+*.html
+
+# Ensure those won't be messed up with
+*.jpg binary
+*.png binary
