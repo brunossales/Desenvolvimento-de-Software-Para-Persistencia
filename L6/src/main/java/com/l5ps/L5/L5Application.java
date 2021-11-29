@@ -1,6 +1,10 @@
 package com.l5ps.L5;
 
 import com.l5ps.L5.DAO.FuncionarioDAO;
+import com.l5ps.L5.DAO.FuncionarioDAOJDBC;
+import com.l5ps.L5.DAO.GenericDAO;
+import com.l5ps.L5.DAO.GenericJPADAO;
+import com.l5ps.L5.UI.UI;
 import com.l5ps.L5.model.Funcionario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,8 +18,8 @@ import java.util.List;
 
 @SpringBootApplication
 public class L5Application implements CommandLineRunner {
-	@Autowired
-	private FuncionarioDAO funDAO;
+
+	private GenericDAO funDAO = new GenericJPADAO<Funcionario>(Funcionario.class);
 	public static void main(String[] args) {
 		//SpringApplication.run(L5Application.class, args);
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(L5Application.class);
@@ -29,16 +33,7 @@ public class L5Application implements CommandLineRunner {
 
 			do{
 				try {
-					op = JOptionPane.showInputDialog(null,
-							"1 - Find All\n"
-									+ "2 - Find ID\n"
-									+ "3 - Insert\n"
-									+ "4 - Update Name\n"
-									+ "5 - Update Email\n"
-									+ "6 - Update Fone\n"
-									+ "7 - Delete\n"
-									+ "8 - Exit",
-							"Menu", JOptionPane.QUESTION_MESSAGE);
+					op = UI.view();
 					switch (op) {
 						case "1":
 							List<Funcionario> funs = funDAO.findAll();
@@ -48,48 +43,36 @@ public class L5Application implements CommandLineRunner {
 							JOptionPane.showMessageDialog(null, sb.toString(), "Funcionários armazenados no Banco", JOptionPane.INFORMATION_MESSAGE);
 							break;
 						case "2":
-							String id = JOptionPane.showInputDialog(null, "Digite o id do Funcionário", "Find By ID", JOptionPane.QUESTION_MESSAGE);
-							Funcionario fun = funDAO.findId(Integer.parseInt(id));
+							String id = UI.viewForId();
+							Funcionario fun = (Funcionario) funDAO.findId(Integer.parseInt(id));
 							JOptionPane.showMessageDialog(null, fun, "Find By Id", JOptionPane.INFORMATION_MESSAGE);
 							break;
 						case "3":
-							String op1 = JOptionPane.showInputDialog(null, "ID - int");
-							String op2 = JOptionPane.showInputDialog(null, "CPF - String");
-							String op3 = JOptionPane.showInputDialog(null, "Matricula - int");
-							String op4 = JOptionPane.showInputDialog(null, "Nome - String");
-							String op5 = JOptionPane.showInputDialog(null, "Email - String");
-							String op6 = JOptionPane.showInputDialog(null, "Telefone - String");
-
-							Funcionario funcs = new Funcionario(Integer.parseInt(op1), op2, Integer.parseInt(op3), op4, op5, op6);
+							Funcionario funcs = UI.viewForInsert();
 							funDAO.insert(funcs);
-							JOptionPane.showMessageDialog(null, "Inserido!", "Insertion", JOptionPane.INFORMATION_MESSAGE);
 							break;
 						case "4":
-							String idd = JOptionPane.showInputDialog(null, "Insira o ID", "Update By Name", JOptionPane.QUESTION_MESSAGE);
-							String namee = JOptionPane.showInputDialog(null, "Insira o Nome", "Update By Name", JOptionPane.QUESTION_MESSAGE);
+							String op11 = UI.viewForId();
+							String op44 = JOptionPane.showInputDialog(null, "Nome - String");
 
-							funDAO.updateNome(Integer.parseInt(idd), namee);
-							JOptionPane.showMessageDialog(null, "Mudado!", "Update By Name", JOptionPane.INFORMATION_MESSAGE);
+							funDAO.updateNome(Integer.parseInt(op11), op44);
 							break;
 						case "5":
-							String idd1 = JOptionPane.showInputDialog(null, "Insira o ID", "Update By Email", JOptionPane.QUESTION_MESSAGE);
-							String email = JOptionPane.showInputDialog(null, "Insira o Email", "Update By Email", JOptionPane.QUESTION_MESSAGE);
+							String opp = UI.viewForId();
+							String op55 = JOptionPane.showInputDialog(null, "Email - String");
 
-							funDAO.updateEmail(Integer.parseInt(idd1), email);
-							JOptionPane.showMessageDialog(null, "Mudado!", "Update By Email", JOptionPane.INFORMATION_MESSAGE);
+							funDAO.updateEmail(Integer.parseInt(opp), op55);
 							break;
 						case "6":
-							String idd2 = JOptionPane.showInputDialog(null, "Insira o ID", "Update By Fone", JOptionPane.QUESTION_MESSAGE);
-							String fone = JOptionPane.showInputDialog(null, "Insira o Fone", "Update By Fone", JOptionPane.QUESTION_MESSAGE);
+							String oop = UI.viewForId();
+							String op66 = JOptionPane.showInputDialog(null, "Telefone - String");
 
-							funDAO.updateTelefone(Integer.parseInt(idd2), fone);
-							JOptionPane.showMessageDialog(null, "Mudado!", "Update By Fone", JOptionPane.INFORMATION_MESSAGE);
+							funDAO.updateTelefone(Integer.parseInt(oop), op66);
 							break;
 						case "7":
-							String idDelete = JOptionPane.showInputDialog(null, "Insira o ID", "Delete Funcionário", JOptionPane.QUESTION_MESSAGE);
+							String idDelete = UI.viewForId();
 
 							funDAO.delete(Integer.parseInt(idDelete));
-							JOptionPane.showMessageDialog(null, "Deletado!", "Delete Funcionário", JOptionPane.INFORMATION_MESSAGE);
 							break;
 						case "8":
 							long elapsed = (System.currentTimeMillis() - start) / 1000;
