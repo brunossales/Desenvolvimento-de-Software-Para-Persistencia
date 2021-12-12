@@ -16,7 +16,7 @@
 - ### Usando Lombok para deixar a entity mais limpa e com menos código
 - ### Usando o Maven para gerenciar os pacotes
 - ### Spring Data JPA para fazer a conexão com o banco e todas operações de atulizar, inserir e deletar
-- ### Assim como foram feitas consultas nomeadas do proprio JPA
+- ### Assim como foram feitas consultas nomeadas do próprio JPA
 - ### Consultas baseadas no nome do método do Spring Data JPA
 - ### Consultas criadas, as @Query do Spring Data JPA
 
