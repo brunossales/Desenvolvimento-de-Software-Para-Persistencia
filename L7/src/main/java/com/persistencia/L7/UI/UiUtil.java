@@ -7,10 +7,10 @@ import java.util.List;
 
 public class  UiUtil {
     public static void obterFuncionario(Funcionario fu){
-        String cpf = JOptionPane.showInputDialog(null, fu.getCpf(), JOptionPane.QUESTION_MESSAGE);
-        String nome = JOptionPane.showInputDialog(null,"Nome", fu.getNome(), JOptionPane.QUESTION_MESSAGE);
-        String email = JOptionPane.showInputDialog(null, "Email", fu.getEmail(), JOptionPane.QUESTION_MESSAGE);
-        String telefone = JOptionPane.showInputDialog(null, "Telefone", fu.getTelefone(), JOptionPane.QUESTION_MESSAGE);
+        String cpf = JOptionPane.showInputDialog("CPF", fu.getCpf());
+        String nome = JOptionPane.showInputDialog("Nome", fu.getNome());
+        String email = JOptionPane.showInputDialog("Email", fu.getEmail());
+        String telefone = JOptionPane.showInputDialog("Telefone", fu.getTelefone());
 
         fu.setCpf(cpf);
         fu.setNome(nome);
@@ -18,72 +18,72 @@ public class  UiUtil {
         fu.setTelefone(telefone);
     }
     public static String menu(){
-        String saida = JOptionPane.showInputDialog(null, "Menu",
-                "1 - Inserir\n"
+        String saida = JOptionPane.showInputDialog(null,"1 - Inserir\n"
                         + "2 - Update by ID\n"
-                        + "3 - Delete by CPF\n"
-                        + "4 - Delete by ID\n"
-                        + "5 - Find First by ID\n"
-                        + "6 - Find First by CPF\n"
-                        + "7 - Find All\n"
-                        + "8 - Delete by Id\n"
-                        + "9 - Nome or Telefone or Email Starting with...\n"
-                        + "10 - Exit"
+                        + "3 - Update by CPF\n"
+                        + "4 - Delete by CPF\n"
+                        + "5 - Delete by ID\n"
+                        + "6 - Find First by ID\n"
+                        + "7 - Find First by CPF\n"
+                        + "8 - Find All\n"
+                        + "9 - Telefone Starting with...\n"
+                        + "10 - Exit",
+                "Menu"
                 , JOptionPane.QUESTION_MESSAGE);
         return saida;
     }
     public static void inf(){
-        JOptionPane.showMessageDialog(null, "Successfully", "Operação realizada!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,"Operação realizada!", "Successfully",  JOptionPane.INFORMATION_MESSAGE);
     }
     public static void listFuns(List<Funcionario> listFun){
         StringBuilder saida = new StringBuilder();
         for(Funcionario fu : listFun)
             saida.append(fu).append("\n");
         JOptionPane.showMessageDialog(null,
-                "List for of Funcincionarios",
                 saida.length() == 0 ? "Not Found Funcionario" : saida.toString(),
+                "List for of Funcincionarios",
                 JOptionPane.INFORMATION_MESSAGE);
     }
     public static void listFun(Funcionario fu){
         JOptionPane.showMessageDialog(null,
-                "List for of Funcionario",
                 fu == null ? "Not Found Funcionario" : fu.toString(),
+                "List for of Funcionario",
                 JOptionPane.INFORMATION_MESSAGE);
     }
     public static void exit(){
         JOptionPane.showMessageDialog(null,
-                "Exit",
                 "Exiting For the Menu...",
+                "Exit",
                 JOptionPane.INFORMATION_MESSAGE);
     }
     public static String pushCpf(){
        return JOptionPane.showInputDialog(null,
+               "Digite o CPF do Funcionario Para Pesquisa",
                 "Digite o CPF",
-                "Digite o CPF do Funcionario Para Pesquisa",
                 JOptionPane.QUESTION_MESSAGE);
     }
     public static String pushId(){
         return JOptionPane.showInputDialog(null,
-                "Digite o ID",
                 "Digite o ID do Funcionario Para Pesquisa",
+                "Digite o ID",
                 JOptionPane.QUESTION_MESSAGE);
     }
     public static void warn(){
         JOptionPane.showMessageDialog(null,
-                "Not Found",
                 "Não foi possível realizar a operação, porque não foi encontrado o Funcionario",
+                "Not Found",
                 JOptionPane.INFORMATION_MESSAGE);
     }
     public static String sherch(){
         return JOptionPane.showInputDialog(null,
-                "Digite uma substring para Nome, Telefone ou Email",
-                "String que nome, telefone ou email comece...",
+                "String que telefone comece...",
+                "Digite uma substring para o Telefone",
                 JOptionPane.QUESTION_MESSAGE);
     }
     public static void invalid(){
         JOptionPane.showInputDialog(null,
-                "Warn",
                 "Opção inválida",
+                "Warn",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 

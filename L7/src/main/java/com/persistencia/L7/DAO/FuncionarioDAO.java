@@ -12,14 +12,11 @@ public interface FuncionarioDAO extends JpaRepository<Funcionario, Integer> {
     //O Sprning já reconhece e procura o primeiro com o cpf
     public Funcionario findFirstByCpf(String cpf);
 
-    public void deleteByCpf(String str);
-
-
-    //Lista de funcionarios iniciado por "tal" nome ou "tal" telefone ou "tal" email
-    public List<Funcionario> findAllByTelefoneStartingWithOrNomeStartingWithOrEmailStartingWith(String str);
+    //Lista de funcionarios iniciado por "tal" telfone(ddd)
+     public List<Funcionario> findByTelefoneStartingWith(String str);
 
     //Query do Spring data JPA
-    @Query("SELECT f FROM Funcionario  f WHERE f.id = :id")
+    @Query("SELECT f FROM Funcionario f WHERE f.id = :id")
     public Funcionario buscaPrimeiroId(Integer id);
 
     //Named Query do JPA - consulta nomeada

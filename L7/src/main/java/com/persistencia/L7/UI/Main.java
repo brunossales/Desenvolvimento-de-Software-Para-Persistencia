@@ -28,7 +28,7 @@ public class Main implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Funcionario funcionario;
-        String op, cpf, id, st;
+        String op = null, cpf, id, st;
         do{
             try{
                 op = UiUtil.menu();
@@ -40,24 +40,20 @@ public class Main implements CommandLineRunner {
                         UiUtil.inf();
                         break;
                     case "2":
-                        cpf = UiUtil.pushCpf();
-                        funcionario = funDAO.findFirstByCpf(cpf);
+                        id = UiUtil.pushId();
+                        funcionario = funDAO.buscaPrimeiroId(Integer.parseInt(id));
                         UiUtil.obterFuncionario(funcionario);
                         funDAO.save(funcionario);
                         break;
                     case "3":
                         cpf = UiUtil.pushCpf();
                         funcionario = funDAO.findFirstByCpf(cpf);
-                        if (funcionario != null){
-                            funDAO.deleteByCpf(cpf);
-                            UiUtil.inf();
-                        }
-                        else
-                            UiUtil.warn();
+                        UiUtil.obterFuncionario(funcionario);
+                        funDAO.save(funcionario);
                         break;
                     case "4":
-                        id = UiUtil.pushId();
-                        funcionario = funDAO.buscaPrimeiroId(Integer.parseInt(id));
+                        cpf = UiUtil.pushCpf();
+                        funcionario = funDAO.findFirstByCpf(cpf);
                         if (funcionario != null){
                             funDAO.deleteById(funcionario.getId());
                             UiUtil.inf();
@@ -68,30 +64,30 @@ public class Main implements CommandLineRunner {
                     case "5":
                         id = UiUtil.pushId();
                         funcionario = funDAO.buscaPrimeiroId(Integer.parseInt(id));
-                        UiUtil.listFun(funcionario);
-                        break;
-                    case "6":
-                        cpf = UiUtil.pushCpf();
-                        funcionario = funDAO.findFirstByCpf(cpf);
-                        UiUtil.listFun(funcionario);
-                        break;
-                    case "7":
-                        UiUtil.listFuns(funDAO.buscaTodos());
-                        break;
-                    case "8":
-                        cpf = UiUtil.pushCpf();
-                        funcionario = funDAO.findFirstByCpf(cpf);
                         if (funcionario != null){
-                            funDAO.deleteByCpf(funcionario.getCpf());
+                            funDAO.deleteById(funcionario.getId());
                             UiUtil.inf();
                         }
                         else
                             UiUtil.warn();
                         break;
+                    case "6":
+                        id = UiUtil.pushId();
+                        funcionario = funDAO.buscaPrimeiroId(Integer.parseInt(id));
+                        UiUtil.listFun(funcionario);
+                        break;
+                    case "7":
+                        cpf = UiUtil.pushCpf();
+                        funcionario = funDAO.findFirstByCpf(cpf);
+                        UiUtil.listFun(funcionario);
+                        break;
+                    case "8":
+                        UiUtil.listFuns(funDAO.buscaTodos());
+                        break;
                     case "9":
                         st = UiUtil.sherch();
                         UiUtil.listFuns(
-                                funDAO.findAllByTelefoneStartingWithOrNomeStartingWithOrEmailStartingWith(st)
+                                funDAO.findByTelefoneStartingWith(st)
                         );
                         break;
                     case "10":
@@ -102,7 +98,6 @@ public class Main implements CommandLineRunner {
                 }
             }catch (NullPointerException z){
                 UiUtil.exit();
-                op = "10";
             }
         }while(!op.equals("10"));
     }
