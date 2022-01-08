@@ -8,13 +8,11 @@ import persistencia.T2.DAO.AlunoDAO;
 import persistencia.T2.DAO.DisciplinaDAO;
 import persistencia.T2.entity.Aluno;
 import persistencia.T2.entity.Disciplina;
-import persistencia.T2.entity.entitysAux.NamedAndDisciplinas;
 import persistencia.T2.entity.entitysAux.NamedAndEmail;
 
 import javax.swing.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,20 +37,67 @@ public class CRUD implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //inserirDisciplinas();
-        //inserirAluno();
-        //addDisciplinaAaluno();
-        //updateDisciplina();
-        //updateAluno();
-        //deleteAluno();
-        //deleteDisciplina();
-        viewAllAlunos();
-        //viewAllDisciplinas();
-        //nomEdiscBA();
-        //alunosDiscBB();
-        //alunoQuantDiscBC();
-        //matriNomeEmaBD();
-        buscaPorData();
+        String op = null;
+        do{
+            try {
+                op = JOptionPane.showInputDialog(null,
+                        "Digite as seguintes opções:\n"
+                                + "  'insertA' - Inserir Aluno\n"
+                                + "  'insertD' - Inserir Disciplina\n"
+                                + "  'association' - Associar uma disciplina com um aluno\n"
+                                + "  'updateA' - Update de Aluno\n"
+                                + "  'updateD - Update de Disciplina\n"
+                                + "  'deleteA - Delete Aluno\n"
+                                + "  'deleteD - Delete Disciplina\n"
+                                + "  'viewAllA - Ver todos os Alunos\n"
+                                + "  'viewAllD - Ver todas as disciplinas\n"
+                                + "  'nomedisc' ou 'buscaA' - Busca da letra A, trazer os nome e as disciplinas de determinado aluno\n"
+                                + "  'aluedisc' ou 'buscaB' - Busca da letra B, traz os alunos que fazem parte de tal disciplina\n"
+                                + "  'aluquantdisc' ou 'buscaC' - Busca da letra C, traz traz os alunos e a quantidade de disciplinas\n"
+                                + "  'matnomemail' ou 'buscaD' - Busca da letra D, traz a matricula, nome e email de um determinado aluno\n"
+                                + "  'buscapordata' ou 'buscaE' - Busca da letra E, traz os alunos que nasceram depois de uma determinada data\n"
+                                + "  'exit' - sair da execução\n",
+                        "Menu", JOptionPane.QUESTION_MESSAGE);
+                if (op.equalsIgnoreCase("insertA"))
+                    inserirAluno();
+                else if(op.equalsIgnoreCase("insertD"))
+                    inserirDisciplinas();
+                else if(op.equalsIgnoreCase("association") || op.equalsIgnoreCase("asso"))
+                    addDisciplinaAaluno();
+                else if(op.equalsIgnoreCase("updateA"))
+                    updateAluno();
+                else if(op.equalsIgnoreCase("updateD"))
+                    updateDisciplina();
+                else if(op.equalsIgnoreCase("deleteA"))
+                    deleteAluno();
+                else if(op.equalsIgnoreCase("deleteD"))
+                    deleteDisciplina();
+                else if(op.equalsIgnoreCase("viewAllA"))
+                    viewAllAlunos();
+                else if(op.equalsIgnoreCase("viewAllD"))
+                    viewAllDisciplinas();
+                else if(op.equalsIgnoreCase("nomedisc") || op.equalsIgnoreCase("buscaA"))
+                    nomEdiscBA();
+                else if(op.equalsIgnoreCase("aluedisc") || op.equalsIgnoreCase("buscaB"))
+                    alunosDiscBB();
+                else if(op.equalsIgnoreCase("aluquantdisc") || op.equalsIgnoreCase("buscaC"))
+                    alunoQuantDiscBC();
+                else if(op.equalsIgnoreCase("matnomemail") || op.equalsIgnoreCase("buscaD"))
+                    matriNomeEmaBD();
+                else if(op.equalsIgnoreCase("buscapordata") || op.equalsIgnoreCase("buscaE"))
+                    buscaPorData();
+                else if(op.equalsIgnoreCase("exit"))
+                    JOptionPane.showMessageDialog(null, "Encerrando", "Exit", JOptionPane.INFORMATION_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(null, "Digite uma opção válida", "Opção inválida", JOptionPane.ERROR_MESSAGE);
+
+            }catch (NullPointerException z){
+                JOptionPane.showMessageDialog(null, "Fim da Execução", "Fim", JOptionPane.ERROR_MESSAGE);
+                op = "exit";
+            }catch (RuntimeException e){
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
+        }while (!op.equalsIgnoreCase("exit"));
     }
 
     public void inserirDisciplinas() {
@@ -60,6 +105,9 @@ public class CRUD implements CommandLineRunner {
         do {
             String nome = JOptionPane.showInputDialog(null, "nome", "nome da disciplina", JOptionPane.QUESTION_MESSAGE);
             String cod = JOptionPane.showInputDialog(null, "codigo", "codigo da disciplina", JOptionPane.QUESTION_MESSAGE);
+            disciplinaAux = disciplinaDAO.findFirstByCodigo(Integer.parseInt(cod));
+            if(disciplinaAux != null)
+                throw new RuntimeException("Já Existe uma disciplina com esse código");
             Disciplina d = new Disciplina();
             d.setNome(nome);
             d.setCodigo(Integer.parseInt(cod));
@@ -75,6 +123,9 @@ public class CRUD implements CommandLineRunner {
             String nome = JOptionPane.showInputDialog(null, "nome");
             String email = JOptionPane.showInputDialog(null, "email");
             String data = JOptionPane.showInputDialog(null, "data");
+            alunoAux = alunoDAO.findFirstByCpf(cpf);
+            if(alunoAux != null)
+                throw new RuntimeException("Esse Aluno já existe");
             Aluno a = new Aluno();
             a.setCpf(cpf);
             a.setNome(nome);
@@ -99,21 +150,29 @@ public class CRUD implements CommandLineRunner {
     }
     public void deleteAluno(){
         String idAluno = JOptionPane.showInputDialog(null, "ID do Aluno");
+        if(!alunoDAO.findById(Integer.parseInt(idAluno)).isPresent())
+            throw new RuntimeException("Aluno não encontrado");
         alunoDAO.deleteById(Integer.parseInt(idAluno));
     }
     public void deleteDisciplina(){
         String idDisciplina = JOptionPane.showInputDialog(null, "ID da Disciplina");
+        if(!disciplinaDAO.findById(Integer.parseInt(idDisciplina)).isPresent())
+            throw new RuntimeException("Disciplina não encontrada");
         disciplinaDAO.deleteById(Integer.parseInt(idDisciplina));
     }
     public void updateAluno() throws ParseException {
         String idAluno = JOptionPane.showInputDialog(null, "ID do Aluno");
         alunoAux = alunoDAO.buscaPrimeiroAluno(Integer.parseInt(idAluno));
+        if(!alunoDAO.findById(Integer.parseInt(idAluno)).isPresent())
+            throw new RuntimeException("Aluno não encontrado");
         obterAluno(alunoAux);
         alunoDAO.save(alunoAux);
     }
     public void updateDisciplina(){
         String idDisciplina = JOptionPane.showInputDialog(null, "ID da Disciplina");
         disciplinaAux = disciplinaDAO.buscaPrimeiraDisciplina(Integer.parseInt(idDisciplina));
+        if(!disciplinaDAO.findById(Integer.parseInt(idDisciplina)).isPresent())
+            throw new RuntimeException("Disciplina não encontrada");
         obterDisciplina(disciplinaAux);
         disciplinaDAO.save(disciplinaAux);
     }
@@ -140,7 +199,12 @@ public class CRUD implements CommandLineRunner {
     }
     public void viewAllAlunos(){
         alunos = alunoDAO.findAll();
-        JOptionPane.showMessageDialog(null, alunos.toString());
+        StringBuilder sb = new StringBuilder();
+        for (Aluno a : alunos) {
+            sb.append("ID: ").append(a.getId()).append(", Nome: ").append(a.getNome())
+                    .append(", Email: ").append(a.getEmail()).append(", CPF: ").append(a.getCpf()).append(", Disciplinas: ").append(a.getDisciplinas()).append("\n");
+        }
+        JOptionPane.showMessageDialog(null, sb.toString());
         alunos.clear();
     }
     public void viewAllDisciplinas(){
@@ -162,9 +226,9 @@ public class CRUD implements CommandLineRunner {
 
         //O Spring não tá armazenando o retorno da Query na interface, como fez em "matriNomeEmaBD()"
 
-        //List<NamedAndDisciplinas> namedAndDisciplina = (List<NamedAndDisciplinas>) alunoDAO.procuraPorSubstringBA(subs);
+        //List<NamedAndDisciplin> namedAndDisciplina = (List<NamedAndDisciplin>) alunoDAO.procuraPorSubstringBA(subs);
         //StringBuilder sb = new StringBuilder();
-        //for (NamedAndDisciplinas a : namedAndDisciplina) {
+        //for (NamedAndDisciplin a : namedAndDisciplina) {
         //    sb.append("Nome: ").append(a.nome())
         //            .append("\nDisciplinas: ").append(a.disciplinas());
         //}
@@ -174,6 +238,8 @@ public class CRUD implements CommandLineRunner {
     public void alunosDiscBB(){
         String idd = JOptionPane.showInputDialog(null, "Id da disciplina");
         alunos = disciplinaDAO.buscaPorCodigo(Integer.parseInt(idd));
+        if(!alunoDAO.findById(Integer.parseInt(idd)).isPresent())
+            throw  new RuntimeException("Aluno não encontrado");
         StringBuilder sb = new StringBuilder();
         sb.append("Alunos que fazem parte da disciplina de código ").append(idd).append("\n");
         for (Aluno a : alunos) {

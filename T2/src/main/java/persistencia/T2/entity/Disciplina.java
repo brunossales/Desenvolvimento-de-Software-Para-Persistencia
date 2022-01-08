@@ -7,7 +7,7 @@ import java.util.List;
 
 @NamedQueries(
         {
-                @NamedQuery(name = "findCodigo", query = "SELECT D.alunos FROM Disciplina D WHERE D.codigo = :cod")
+                @NamedQuery(name = "findCodigo", query = "SELECT D.alunos as alunos FROM Disciplina D WHERE D.codigo = :cod")
         }
 )
 

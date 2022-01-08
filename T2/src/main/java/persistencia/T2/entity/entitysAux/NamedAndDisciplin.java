@@ -4,7 +4,7 @@ import persistencia.T2.entity.Disciplina;
 
 import java.util.List;
 
-public interface NamedAndDisciplinas {
+public interface NamedAndDisciplin {
     String nome();
     List<Disciplina> disciplinas();
 }
