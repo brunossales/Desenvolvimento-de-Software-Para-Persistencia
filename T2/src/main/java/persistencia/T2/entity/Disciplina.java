@@ -35,7 +35,7 @@ public class Disciplina {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("ID: ").append(id).append(", Código: ").append(codigo).append(", Nome: ").append(nome).append("\n");
+        sb.append("ID_Disciplina: ").append(id).append(", Código_Disciplina: ").append(codigo).append(", Nome_Disciplina: ").append(nome).append("\n");
         return sb.toString();
     }
 

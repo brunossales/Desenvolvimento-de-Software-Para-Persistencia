@@ -6,8 +6,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import persistencia.T2.DAO.AlunoDAO;
 import persistencia.T2.DAO.DisciplinaDAO;
+import persistencia.T2.UI.View;
 import persistencia.T2.entity.Aluno;
 import persistencia.T2.entity.Disciplina;
+import persistencia.T2.entity.entitysAux.NameAndCountD;
 import persistencia.T2.entity.entitysAux.NamedAndEmail;
 
 import javax.swing.*;
@@ -44,7 +46,7 @@ public class CRUD implements CommandLineRunner {
                         "Digite as seguintes opções:\n"
                                 + "  'insertA' - Inserir Aluno\n"
                                 + "  'insertD' - Inserir Disciplina\n"
-                                + "  'association' - Associar uma disciplina com um aluno\n"
+                                + "  'association' ou 'asso' - Associar uma disciplina com um aluno\n"
                                 + "  'updateA' - Update de Aluno\n"
                                 + "  'updateD - Update de Disciplina\n"
                                 + "  'deleteA - Delete Aluno\n"
@@ -103,8 +105,8 @@ public class CRUD implements CommandLineRunner {
     public void inserirDisciplinas() {
         String op;
         do {
-            String nome = JOptionPane.showInputDialog(null, "nome", "nome da disciplina", JOptionPane.QUESTION_MESSAGE);
-            String cod = JOptionPane.showInputDialog(null, "codigo", "codigo da disciplina", JOptionPane.QUESTION_MESSAGE);
+            String nome = View.nomeDisp();
+            String cod = View.codigo();
             disciplinaAux = disciplinaDAO.findFirstByCodigo(Integer.parseInt(cod));
             if(disciplinaAux != null)
                 throw new RuntimeException("Já Existe uma disciplina com esse código");
@@ -140,28 +142,31 @@ public class CRUD implements CommandLineRunner {
     public void addDisciplinaAaluno(){
         String op;
         do{
-            String idAluno = JOptionPane.showInputDialog(null, "ID do Aluno");
-            String disc = JOptionPane.showInputDialog(null, "ID da Disciplina");
+            String idAluno = View.idAluno();
+            String disc = View.idDisciplina();
             disciplinaAux = disciplinaDAO.buscaPrimeiraDisciplina(Integer.parseInt(disc));
-            disciplinaAux.getAlunos().add(alunoDAO.buscaPrimeiroAluno(Integer.parseInt(idAluno)));
+            alunoAux = alunoDAO.buscaPrimeiroAluno(Integer.parseInt(idAluno));
+            disciplinaAux.getAlunos().add(alunoAux);
+            if(disciplinaAux == null || alunoAux == null)
+                throw new RuntimeException("Não encontrado");
             disciplinaDAO.save(disciplinaAux);
             op = JOptionPane.showInputDialog(null, "Deseja adicionar mais disciplinas a um aluno?", "sim ou nao");
         }while(!op.equals("nao"));
     }
     public void deleteAluno(){
-        String idAluno = JOptionPane.showInputDialog(null, "ID do Aluno");
+        String idAluno = View.idAluno();
         if(!alunoDAO.findById(Integer.parseInt(idAluno)).isPresent())
             throw new RuntimeException("Aluno não encontrado");
         alunoDAO.deleteById(Integer.parseInt(idAluno));
     }
     public void deleteDisciplina(){
-        String idDisciplina = JOptionPane.showInputDialog(null, "ID da Disciplina");
+        String idDisciplina = View.idDisciplina();
         if(!disciplinaDAO.findById(Integer.parseInt(idDisciplina)).isPresent())
             throw new RuntimeException("Disciplina não encontrada");
         disciplinaDAO.deleteById(Integer.parseInt(idDisciplina));
     }
     public void updateAluno() throws ParseException {
-        String idAluno = JOptionPane.showInputDialog(null, "ID do Aluno");
+        String idAluno = View.idAluno();
         alunoAux = alunoDAO.buscaPrimeiroAluno(Integer.parseInt(idAluno));
         if(!alunoDAO.findById(Integer.parseInt(idAluno)).isPresent())
             throw new RuntimeException("Aluno não encontrado");
@@ -169,7 +174,7 @@ public class CRUD implements CommandLineRunner {
         alunoDAO.save(alunoAux);
     }
     public void updateDisciplina(){
-        String idDisciplina = JOptionPane.showInputDialog(null, "ID da Disciplina");
+        String idDisciplina = View.idDisciplina();
         disciplinaAux = disciplinaDAO.buscaPrimeiraDisciplina(Integer.parseInt(idDisciplina));
         if(!disciplinaDAO.findById(Integer.parseInt(idDisciplina)).isPresent())
             throw new RuntimeException("Disciplina não encontrada");
@@ -201,8 +206,10 @@ public class CRUD implements CommandLineRunner {
         alunos = alunoDAO.findAll();
         StringBuilder sb = new StringBuilder();
         for (Aluno a : alunos) {
-            sb.append("ID: ").append(a.getId()).append(", Nome: ").append(a.getNome())
-                    .append(", Email: ").append(a.getEmail()).append(", CPF: ").append(a.getCpf()).append(", Disciplinas: ").append(a.getDisciplinas()).append("\n");
+            sb.append("ID: ").append(a.getId()).append(", Matricula: ").append(a.getMatricula())
+                    .append(", Nome: ").append(a.getNome())
+                    .append(", Email: ").append(a.getEmail()).append(", CPF: ")
+                    .append(a.getCpf()).append(", Disciplinas: ").append(a.getDisciplinas()).append("\n");
         }
         JOptionPane.showMessageDialog(null, sb.toString());
         alunos.clear();
@@ -236,9 +243,9 @@ public class CRUD implements CommandLineRunner {
         //alunos.clear();
     }
     public void alunosDiscBB(){
-        String idd = JOptionPane.showInputDialog(null, "Id da disciplina");
+        String idd = View.codigo();
         alunos = disciplinaDAO.buscaPorCodigo(Integer.parseInt(idd));
-        if(!alunoDAO.findById(Integer.parseInt(idd)).isPresent())
+        if(alunos.get(0) == null)
             throw  new RuntimeException("Aluno não encontrado");
         StringBuilder sb = new StringBuilder();
         sb.append("Alunos que fazem parte da disciplina de código ").append(idd).append("\n");
@@ -250,17 +257,16 @@ public class CRUD implements CommandLineRunner {
         alunos.clear();
     }
     public void alunoQuantDiscBC(){
-        alunos = alunoDAO.findAll();
+        List<NameAndCountD> nc = (List<NameAndCountD>) alunoDAO.buscaCountBC();
         StringBuilder sb = new StringBuilder();
-        for (Aluno a : alunos) {
+        for (NameAndCountD a : nc) {
             sb.append("Nome: ").append(a.getNome()).append(", Número de Disciplinas: ")
-                    .append(a.getDisciplinas().size()).append("\n");
+                    .append(a.getCount()).append("\n");
         }
         JOptionPane.showMessageDialog(null, sb.toString());
-        alunos.clear();
     }
     public void matriNomeEmaBD(){
-        String mat = JOptionPane.showInputDialog(null, "Matrícula do Aluno");
+        String mat = View.aluMatri();
         List<NamedAndEmail> al = (List<NamedAndEmail>) alunoDAO.buscaPorCodigoBD(Integer.parseInt(mat));
         StringBuilder sb = new StringBuilder();
         for (NamedAndEmail a : al ) {
@@ -270,7 +276,7 @@ public class CRUD implements CommandLineRunner {
         al.clear();
     }
     public void buscaPorData() throws ParseException {
-        String data = JOptionPane.showInputDialog(null, "data");
+        String data = View.data();
         Date dataa = formato.parse(data);
         alunos = alunoDAO.buscaPorDataBE(dataa);
         StringBuilder sb = new StringBuilder();

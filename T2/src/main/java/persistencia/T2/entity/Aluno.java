@@ -9,8 +9,9 @@ import java.util.List;
 
 @NamedQueries(
         {
-          @NamedQuery(name = "nomeEemail", query = "SELECT A.nome as nome, A.email as email FROM Aluno A WHERE A.matricula = :matricula"),
-          @NamedQuery(name = "dataBE", query = "SELECT A FROM Aluno A WHERE A.dataNasc > :data")
+                @NamedQuery(name = "nomeEemail", query = "SELECT A.nome as nome, A.email as email FROM Aluno A WHERE A.matricula = :matricula"),
+                @NamedQuery(name = "dataBE", query = "SELECT A FROM Aluno A WHERE A.dataNasc > :data"),
+                @NamedQuery(name = "nameAndCount", query = "SELECT A.nome as nome, size(A.disciplinas) as count FROM Aluno A")
         }
 )
 
@@ -46,7 +47,7 @@ public class Aluno {
           StringBuilder sb = new StringBuilder();
           sb.append("ID: ").append(id).append(", CPF: ").append(cpf).append(", Matrícula: ")
                   .append(matricula).append(", Nome: ").append(nome).append(", Email: ").append(email)
-                  .append(", Data de Nascimento: ").append(dataNasc).append("\nDisciplinas: ");
+                  .append(", Data de Nascimento: ").append(dataNasc).append("\nDisciplinas: \n");
           for (Disciplina d : disciplinas) {
                sb.append("\t").append(d).append("\n");
           }

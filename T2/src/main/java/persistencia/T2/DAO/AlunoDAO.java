@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import persistencia.T2.entity.Aluno;
+import persistencia.T2.entity.entitysAux.NameAndCountD;
 import persistencia.T2.entity.entitysAux.NamedAndDisciplin;
 import persistencia.T2.entity.entitysAux.NamedAndEmail;
 
@@ -11,6 +12,7 @@ import javax.swing.text.html.Option;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface AlunoDAO extends JpaRepository<Aluno, Integer> {
@@ -29,4 +31,7 @@ public interface AlunoDAO extends JpaRepository<Aluno, Integer> {
 
     @Query(name = "dataBE")
     public List<Aluno> buscaPorDataBE(Date data);
+
+    @Query(name = "nameAndCount")
+    public List<NameAndCountD> buscaCountBC();
 }
