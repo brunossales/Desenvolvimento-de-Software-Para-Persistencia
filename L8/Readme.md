@@ -6,6 +6,8 @@
 
 ## Requisitos da lista
 
+- ### Obs(Na aplicação elas não retornam a lista de valores como o professor pediu)
+
 - ### Todas as tags de um determinado artigo.
 
 - ### Todos os artigos de uma determinada tag.
