@@ -13,8 +13,6 @@
 
 </div>
 
-## 📚 Repositório destinado aos estudos da cadeira de Desenvolvimento de Software para Persistência
-
 ## 📁 Dentro dos diretórios existe um readme explicativo sobre o que foi abordado
 
 ## 💻 Pré-requisitos
@@ -39,14 +37,14 @@
 - ### PostgreSQL
 - ### JPA
 
-## 📫 O intuito da cadeira foi disponibilzar o conhecimento aos alunos das técnologias de persistências mais usadas atualmente
+## 📚 O intuito da cadeira foi disponibilzar o conhecimento aos alunos das técnologias de persistências mais usadas atualmente
 
 ## 🤝 Colaboradores
 
 - ## Professor Regis; 
 
 - ## Estagiário Wilken;
-- 
+  
 - ## Aluno e autor Bruno Sales.
 
 [⬆ Voltar ao topo](https://github.com/brunossales/Desenvolvimento-de-Software-Para-Persistencia#desenvolvimento-de-software-para-persist%C3%AAncia-)<br>
