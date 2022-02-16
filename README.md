@@ -1,5 +1,52 @@
-# Repositório da disciplina Desenvolvimento de Software para Persistência ✅
+<div align="center">
 
-## Desafios e estudos feitos em aula e fora de aula. ✅
+# Desenvolvimento de Software Para Persistência 🧑‍💻
 
-## Tudo feito em variadas Linguagens e métodos. 👨‍💻
+</div>
+
+<div align="center">
+
+<img height=24he src="https://img.shields.io/github/repo-size/brunossales/Desenvolvimento-de-Software-Para-Persistencia" /> 
+<img height=24he src="https://img.shields.io/github/languages/count/brunossales/Desenvolvimento-de-Software-Para-Persistencia" /> 
+<img height=25he src="https://img.shields.io/github/stars/brunossales/Desenvolvimento-de-Software-Para-Persistencia" /> 
+<img height=25he src="https://img.shields.io/github/forks/brunossales/Desenvolvimento-de-Software-Para-Persistencia" /> 
+
+</div>
+
+## 📚 Repositório destinado aos estudos da cadeira de Desenvolvimento de Software para Persistência
+
+## 📁 Dentro dos diretórios existe um readme explicativo sobre o que foi abordado
+
+## 💻 Pré-requisitos
+
+  - ## POO - Programação Orientada a Objetos
+
+  - ## FBD - Fundamentos de Programação
+
+## 🚀 Linguagem Java
+
+## 🧰 Frameworks:
+
+- ### Spring Framework
+- ### Spring Boot
+- ### Spring Data JPA
+- ### Hibernate
+
+## 💾 Bancos/Ferramentas:
+
+- ### MongoDB
+- ### Redis
+- ### PostgreSQL
+- ### JPA
+
+## 📫 O intuito da cadeira foi disponibilzar o conhecimento aos alunos das técnologias de persistências mais usadas atualmente
+
+## 🤝 Colaboradores
+
+- ## Professor Regis; 
+
+- ## Estagiário Wilken;
+- 
+- ## Aluno e autor Bruno Sales.
+
+[⬆ Voltar ao topo]()<br>
