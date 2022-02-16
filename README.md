@@ -19,7 +19,7 @@
 
   - ### POO - Programação Orientada a Objetos
 
-  - ### FBD - Fundamentos de Programação
+  - ### FBD - Fundamentos de banco de dados
   
   <hr>
 
