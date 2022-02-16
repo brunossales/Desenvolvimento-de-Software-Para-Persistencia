@@ -15,11 +15,15 @@
 
 ## 📁 Dentro dos diretórios existe um readme explicativo sobre o que foi abordado
 
+<hr>
+
 ## 💻 Pré-requisitos
 
   - ## POO - Programação Orientada a Objetos
 
   - ## FBD - Fundamentos de Programação
+  
+  <hr>
 
 ## 🚀 Linguagem Java
 
@@ -29,6 +33,8 @@
 - ### Spring Boot
 - ### Spring Data JPA
 - ### Hibernate
+  
+<hr>
 
 ## 💾 Bancos/Ferramentas:
 
@@ -36,6 +42,8 @@
 - ### Redis
 - ### PostgreSQL
 - ### JPA
+
+<hr>
 
 ## 📚 O intuito da cadeira foi disponibilzar o conhecimento aos alunos das técnologias de persistências mais usadas atualmente
 
