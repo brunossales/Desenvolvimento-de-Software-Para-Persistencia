@@ -15,13 +15,11 @@
 
 ## 📁 Dentro dos diretórios existe um readme explicativo sobre o que foi abordado
 
-<hr>
-
 ## 💻 Pré-requisitos
 
-  - ## POO - Programação Orientada a Objetos
+  - ### POO - Programação Orientada a Objetos
 
-  - ## FBD - Fundamentos de Programação
+  - ### FBD - Fundamentos de Programação
   
   <hr>
 
@@ -49,10 +47,12 @@
 
 ## 🤝 Colaboradores
 
-- ## Professor Regis; 
+- ### Professor Regis; 
 
-- ## Estagiário Wilken;
+- ### Estagiário Wilken;
   
-- ## Aluno e autor Bruno Sales.
+- ### Aluno e autor Bruno Sales.
+
+<hr>
 
 [⬆ Voltar ao topo](https://github.com/brunossales/Desenvolvimento-de-Software-Para-Persistencia#desenvolvimento-de-software-para-persist%C3%AAncia-)<br>
