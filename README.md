@@ -9,7 +9,6 @@
 <img height=24he src="https://img.shields.io/github/repo-size/brunossales/Desenvolvimento-de-Software-Para-Persistencia" /> 
 <img height=24he src="https://img.shields.io/github/languages/count/brunossales/Desenvolvimento-de-Software-Para-Persistencia" /> 
 <img height=25he src="https://img.shields.io/github/stars/brunossales/Desenvolvimento-de-Software-Para-Persistencia" /> 
-<img height=25he src="https://img.shields.io/github/forks/brunossales/Desenvolvimento-de-Software-Para-Persistencia" /> 
 
 </div>
 
